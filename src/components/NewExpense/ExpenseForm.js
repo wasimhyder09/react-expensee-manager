@@ -1,73 +1,89 @@
 import { useState } from 'react';
 
 const ExpenseForm = () => {
-  const [title, setTitle] = useState('');
-  const [amount, setAmount] = useState('');
-  const [date, setDate] = useState('');
+  const [enteredTitle, setEnteredTitle] = useState('');
+  const [enteredAmount, setEnteredAmount] = useState('');
+  const [enteredDate, setEnteredDate] = useState('');
 
   // const [userInput, setUserInput] = useState({
-  //   title: '',
-  //   amount: '',
-  //   date: ''
+  //   enteredTitle: '',
+  //   enteredAmount: '',
+  //   enteredDate: ''
   // });
 
   const titleChangeHandler = (event) => {
-    setTitle(event.target.value);
+    setEnteredTitle(event.target.value);
     // setUserInput({
     //   ...userInput,
-    //   title: event.target.value
+    //   enteredTitle: event.target.value
     // });
   };
 
   const amoutChangeHandler = (event) => {
-    setAmount(event.target.value);
+    setEnteredAmount(event.target.value);
     // setUserInput({
     //   ...userInput,
-    //   amount: event.target.value
+    //   enteredAmount: event.target.value
     // });
   };
 
   const dateChangeHandler = (event) => {
-    setDate(event.target.value);
+    setEnteredDate(event.target.value);
     // setUserInput({
     //   ...userInput,
-    //   date: event.target.value
+    //   enteredDate: event.target.value
     // });
   };
 
   // Generic Input handler.
   // const inputChangeHanlder = (identifier, value) => {
   //   if (identifier === 'title') {
-  //     setTitle(value);
+  //     setEnteredTitle(value);
   //   }
   //   else if (identifier === 'amount') {
-  //     setAmount(value);
+  //     setEnteredAmount(value);
   //   }
   //   else {
-  //     setDate(value);
+  //     setEnteredDate(value);
   //   }
   // };
 
-  return <form>
-    <div className="new-expense__controls">
-      <div className="new-expense__control">
-        <label>Title</label>
-        <input type="text" onChange={titleChangeHandler} />
-        {/* <input type="text" onChange={(event) => inputChangeHanlder('title', event.target.value)} /> This is for the call of generic input change handler. */}
+  const submitHanlder = (event) => {
+    event.preventDefault();
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate)
+    }
+    console.log(expenseData);
+    setEnteredTitle('');
+    setEnteredAmount('');
+    setEnteredDate('');
+  };
+
+  return (
+    <form onSubmit={submitHanlder}>
+      <div className="new-expense__controls">
+        <div className="new-expense__control">
+          <label>Title</label>
+          <input type="text" value={enteredTitle} onChange={titleChangeHandler} />
+          {/* <input type="text" onChange={(event) => inputChangeHanlder('title', event.target.value)} /> This is how you will call the generic input change handler. */}
+        </div>
+        <div className="new-expense__control">
+          <label>Amount</label>
+          <input type="number" value={enteredAmount} min="0.01" step="0.01" onChange={amoutChangeHandler} />
+        </div>
+        <div className="new-expense__control">
+          <label>Date</label>
+          <input type="date" value={enteredDate} min="2019-01-01" max="2022-12-31" onChange={dateChangeHandler} />
+        </div>
       </div>
-      <div className="new-expense__control">
-        <label>Amount</label>
-        <input type="number" min="0.01" step="0.01" onChange={amoutChangeHandler} />
+      <div className="new-expense__actions">
+        <button type="submit">Add Expense</button>
       </div>
-      <div className="new-expense__control">
-        <label>Date</label>
-        <input type="date" min="2019-01-01" max="2022-12-31" onChange={dateChangeHandler} />
-      </div>
-    </div>
-    <div className="new-expense__actions">
-      <button type="submit">Add Expense</button>
-    </div>
-  </form>
+    </form>
+  );
 };
 
 export default ExpenseForm;
