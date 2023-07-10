@@ -1,7 +1,6 @@
 import ExpenseItem from "./ExpenseItem";
 
 function Expense(props) {
-  console.log(props);
   return(
     <div className="expenses">
       <ExpenseItem
