@@ -184,7 +184,8 @@ body {
   padding: 0;
 }
 
-.expenses-list__fallback {
+.expenses-list__fallback,
+.site-title {
   color: white;
   text-align: center;
 }

@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div>
-      <h2>Let's get started!</h2>
+      <h2 className='site-title'>Expense Manager</h2>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expense item={expenses} />
     </div>
